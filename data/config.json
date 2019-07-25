@@ -1,0 +1,8 @@
+{
+    "train_path": "../data/english_short_corpus_small_4to12_train.txt",
+    "test_path": "../data/english_short_corpus_small_4to12_test.txt",
+    "valid_path": "../data/english_short_corpus_small_4to12_valid.txt",
+    "long_test_path": "../data/english_short_corpus_small_13to20_test.txt",
+    "word_set_path": "../data/word_set.pkl",
+    "vocab_path": "../data/vocab.pkl"
+}

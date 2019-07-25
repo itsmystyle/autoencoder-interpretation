@@ -1,32 +1,8 @@
-# Prerequisites
-*.d
+# Model files
+model.pkl.*
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Dataset
+english_short_corpus_small_13to20_test.txt
+english_short_corpus_small_4to12_test.txt
+english_short_corpus_small_4to12_train.txt
+english_short_corpus_small_4to12_valid.txt

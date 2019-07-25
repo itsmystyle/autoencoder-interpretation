@@ -1,6 +1,9 @@
 # Model files
 model.pkl.*
 
+# python compiled code
+*.pyc
+
 # Dataset
 english_short_corpus_small_13to20_test.txt
 english_short_corpus_small_4to12_test.txt

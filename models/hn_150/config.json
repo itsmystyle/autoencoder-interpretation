@@ -6,7 +6,7 @@
         "encoder_model_name": "EncoderRNN",
         "decoder_model_name": "DecoderRNN",
         "hidden_size": 150,
-        "batch_size": 32,
+        "batch_size": 64,
         "max_epochs": 200,
         "max_iters_in_epoch": 1e20,
         "grad_accumulate_steps": 1,

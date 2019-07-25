@@ -90,7 +90,7 @@ class Predictor(BasePredictor):
 
                 loss += F.nll_loss(decoder_output, batch['sentence'][di+1], ignore_index=self.word_dict['<PAD>'])
                 
-                acc *= (decoder_input.squeeze().data == batch['sentence'][di+1].data)
+                acc *= torch.clamp((decoder_input.squeeze().data == batch['sentence'][di+1].data) + (batch['sentence'][di+1].data == self.word_dict['<PAD>']), min=0, max=1)
         
         return acc, loss/seq_len
 

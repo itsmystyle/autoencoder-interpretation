@@ -52,11 +52,11 @@ class BasePredictor():
 
             # evaluate valid score
             if self.valid is not None:
-                print('dev evaluating %i' % self.epoch)
+                print('evaluating %i' % self.epoch)
                 dataloader = Data.DataLoader(dataset = self.valid, 
                                              batch_size = self.batch_size, 
                                              shuffle = False, 
-                                             collate_fn = collate_fn, 
+                                             collate_fn = self.valid.collate_fn, 
                                              num_workers = self.num_workers)
                 
                 log_valid = self._run_epoch(dataloader, False)

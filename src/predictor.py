@@ -65,7 +65,7 @@ class Predictor(BasePredictor):
             encoder_hn.append(hn)
         
         encoder_hn.pop(0)
-        encoder_hn = torch.stack(encoder_hn, dim=0).squeeze().transpose(0, 1) # batch, seq_len, dim
+        encoder_hn = torch.stack(encoder_hn, dim=0).squeeze(1).transpose(0, 1) # batch, seq_len, dim
         
         idx = batch['sentence_len'].unsqueeze(1).repeat(1, self.hidden_size).view(batch_size, 1, self.hidden_size)
         decoder_hidden = torch.gather(encoder_hn, 1, idx).transpose(0, 1)

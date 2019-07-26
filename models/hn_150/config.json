@@ -6,14 +6,14 @@
         "encoder_model_name": "EncoderRNN",
         "decoder_model_name": "DecoderRNN",
         "hidden_size": 150,
-        "batch_size": 64,
+        "batch_size": 32,
         "max_epochs": 200,
         "max_iters_in_epoch": 1e20,
         "grad_accumulate_steps": 1,
         "num_workers": 4,
         "weight_decay": 1e-5,
         "optimizer": "Adam",
-        "learning_rate": 1e-4,
+        "learning_rate": 5e-4,
         "valid": "../data/valid.pkl"
     }
 }

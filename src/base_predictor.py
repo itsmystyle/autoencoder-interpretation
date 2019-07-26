@@ -109,6 +109,10 @@ class BasePredictor():
         self.decoder.load_state_dict(torch.load(path)['decoder'])
         self.optimizer.load_state_dict(torch.load(path)['optimizer'])
         self.epoch = torch.load(path)['epoch']
+        
+        for g in self.optimizer:
+            if g['lr'] != self.learning_rate:
+                g['lr'] = self.learning_rate
 
     def _run_epoch(self, dataloader, training):
         self.encoder.train(training)

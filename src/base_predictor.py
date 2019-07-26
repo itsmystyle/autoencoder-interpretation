@@ -110,7 +110,7 @@ class BasePredictor():
         self.optimizer.load_state_dict(torch.load(path)['optimizer'])
         self.epoch = torch.load(path)['epoch']
         
-        for g in self.optimizer:
+        for g in self.optimizer.param_groups:
             if g['lr'] != self.learning_rate:
                 g['lr'] = self.learning_rate
 

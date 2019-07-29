@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import pdb
 
 class DecoderRNN(nn.Module):
-    def __init__(self, hidden_size, output_size):
+    def __init__(self, hidden_size, output_size, embedding_size=300, use_same_embedding=False):
         super(DecoderRNN, self).__init__()
         
         # set random seed
@@ -15,14 +15,22 @@ class DecoderRNN(nn.Module):
         
         self.hidden_size = hidden_size
         self.output_size = output_size
+        self.embedding_size = embedding_size
+        self.use_same_embedding = use_same_embedding
         
-        self.embedding = nn.Embedding(self.output_size, 300)
-        self.gru = nn.GRU(300, self.hidden_size)
+        if not self.use_same_embedding:
+            self.embedding = nn.Embedding(self.output_size, self.embedding_size)
+            
+        self.gru = nn.GRU(self.embedding_size, self.hidden_size)
         self.out = nn.Linear(self.hidden_size, self.output_size)
         self.softmax = nn.LogSoftmax(dim=1)
     
     def forward(self, input, hidden):
-        output = self.embedding(input).view(1, input.shape[0], -1)
+        if not self.use_same_embedding:
+            output = self.embedding(input).view(1, input.shape[0], -1)
+        else:
+            output = input
+            
         output = F.relu(output)
         output, hidden = self.gru(output, hidden)
         output = self.softmax(self.out(output[0]))

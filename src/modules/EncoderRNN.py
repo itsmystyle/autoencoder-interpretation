@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import pdb
 
 class EncoderRNN(nn.Module):
-    def __init__(self, input_size, hidden_size):
+    def __init__(self, input_size, hidden_size, embedding_size=300):
         super(EncoderRNN, self).__init__()
         
         # set random seed
@@ -15,12 +15,16 @@ class EncoderRNN(nn.Module):
         
         self.input_size = input_size
         self.hidden_size = hidden_size
+        self.embedding_size = embedding_size
         
-        self.embedding = nn.Embedding(self.input_size, 300)
-        self.gru = nn.GRU(300, self.hidden_size)
+        self.embedding = nn.Embedding(self.input_size, self.embedding_size)
+        self.gru = nn.GRU(self.embedding_size, self.hidden_size)
     
     def forward(self, input, hidden=None):
         output = self.embedding(input).view(1, input.shape[0], -1)
         output = F.relu(output)
         output, hidden = self.gru(output, hidden)
         return output, hidden
+    
+    def get_embedding(self, input):
+        return self.embedding(input).view(1, input.shape[0], -1)

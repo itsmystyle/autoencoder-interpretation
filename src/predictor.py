@@ -16,6 +16,8 @@ class Predictor(BasePredictor):
     def __init__(self,
                  optimizer,
                  hidden_size,
+                 embedding_size,
+                 use_same_embedding,
                  word_dict=None,
                  use_teacher_forcing=False,
                  encoder_model_name="EncoderNet",
@@ -29,12 +31,14 @@ class Predictor(BasePredictor):
         self.vocab_size = len(word_dict)
         self.hidden_size = hidden_size
         self.weight_decay = weight_decay
+        self.embedding_size = embedding_size
+        self.use_same_embedding = use_same_embedding
         
         if encoder_model_name == "EncoderRNN":
-            self.encoder = EncoderRNN(self.vocab_size, self.hidden_size)
+            self.encoder = EncoderRNN(self.vocab_size, self.hidden_size, self.embedding_size)
         
         if decoder_model_name == "DecoderRNN":
-            self.decoder = DecoderRNN(self.hidden_size, self.vocab_size)
+            self.decoder = DecoderRNN(self.hidden_size, self.vocab_size, self.embedding_size, self.use_same_embedding)
 
         # use cuda
         self.encoder = self.encoder.to(self.device)
@@ -81,6 +85,9 @@ class Predictor(BasePredictor):
             acc = torch.ones(batch_size, dtype=torch.uint8, device=self.device)
             
             for di in range(seq_len):
+                if self.use_same_embedding:
+                    decoder_input = self.encoder.get_embedding(decoder_input).detach()
+                    
                 decoder_output, decoder_hidden = self.decoder(decoder_input, 
                                                               decoder_hidden)
                 

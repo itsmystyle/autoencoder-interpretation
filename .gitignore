@@ -9,3 +9,4 @@ english_short_corpus_small_13to20_test.txt
 english_short_corpus_small_4to12_test.txt
 english_short_corpus_small_4to12_train.txt
 english_short_corpus_small_4to12_valid.txt
+*.pkl

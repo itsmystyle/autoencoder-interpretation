@@ -31,7 +31,7 @@ class DecoderRNN(nn.Module):
         else:
             output = input
             
-        output = F.relu(output)
+#         output = F.relu(output)
         output, hidden = self.gru(output, hidden)
         output = self.softmax(self.out(output[0]))
         

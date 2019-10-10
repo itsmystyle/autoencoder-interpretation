@@ -22,7 +22,7 @@ class EncoderRNN(nn.Module):
     
     def forward(self, input, hidden=None):
         output = self.embedding(input).view(1, input.shape[0], -1)
-        output = F.relu(output)
+#         output = F.relu(output)
         output, hidden = self.gru(output, hidden)
         return output, hidden
     

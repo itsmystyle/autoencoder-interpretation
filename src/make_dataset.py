@@ -33,11 +33,11 @@ def main(args):
     with open(config["test_path"], "r") as f:
         test_data = f.readlines()
 
-    logging.info(
-        "loading long corpus testing data from {}".format(config["long_test_path"])
-    )
-    with open(config["long_test_path"], "r") as f:
-        long_test_data = f.readlines()
+    # logging.info(
+    #     "loading long corpus testing data from {}".format(config["long_test_path"])
+    # )
+    # with open(config["long_test_path"], "r") as f:
+    #     long_test_data = f.readlines()
 
     # collect words appear in the data
     logging.info("collecting words from training set...")
@@ -107,12 +107,12 @@ def main(args):
         pickle.dump(test, f)
 
     # long test
-    logging.info('Processing long corpus testing set from {}'.format(config['long_test_path']))
-    long_test = preprocessor.get_dataset(long_test_data, args.n_workers)
-    long_test_pkl_path = os.path.join(args.dest_dir, 'long_test_{}.pkl'.format(args.threshold))
-    logging.info('Saving long corpus testing set to {}'.format(long_test_pkl_path))
-    with open(long_test_pkl_path, 'wb') as f:
-        pickle.dump(long_test, f)
+    # logging.info('Processing long corpus testing set from {}'.format(config['long_test_path']))
+    # long_test = preprocessor.get_dataset(long_test_data, args.n_workers)
+    # long_test_pkl_path = os.path.join(args.dest_dir, 'long_test_{}.pkl'.format(args.threshold))
+    # logging.info('Saving long corpus testing set to {}'.format(long_test_pkl_path))
+    # with open(long_test_pkl_path, 'wb') as f:
+    #     pickle.dump(long_test, f)
 
 # TEST
 #     dataloader = DataLoader(long_test,

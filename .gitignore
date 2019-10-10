@@ -4,8 +4,12 @@ models/*
 # python compiled code
 *.pyc
 __pycache__
-.DS_Store
-.ipynb_checkpoints
+*.DS_Store
+*.ipynb_checkpoints
 
 # Dataset
 data/*
+
+# Ignore everything but these
+!data/config.json
+!models/seq2seq/*

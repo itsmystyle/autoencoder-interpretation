@@ -1,21 +1,21 @@
-import argparse
-import logging
 import os
-import pdb
-import pickle
 import sys
-import traceback
 import json
+import logging
+import traceback
+
+import pickle
+import argparse
+
+from metrics import Accuracy
 from callbacks import ModelCheckpoint, MetricsLogger
-from metrics import *
-from lr_finder import LRFinder
 
 
 def main(args):
     config_path = os.path.join(args.model_dir, 'config.json')
     with open(config_path) as f:
         config = json.load(f)
-        
+
     logging.info('loading word dictionary...')
     with open(config['words_dict'], 'rb') as f:
         words_dict = pickle.load(f)
@@ -23,43 +23,14 @@ def main(args):
     logging.info('loading train data...')
     with open(config['train'], 'rb') as f:
         train = pickle.load(f)
-        
+
     logging.info('loading validation data...')
     with open(config['model_parameters']['valid'], 'rb') as f:
         valid = pickle.load(f)
     config['model_parameters']['valid'] = valid
-    
+
     if args.lr_finder:
-#         logging.info('creating model!')
-        
-#         vocab_size = len(words_dict)
-#         hidden_size = config['model_parameters']['hidden_size']
-#         embedding_size = config['model_parameters']['embedding_size']
-#         use_same_embedding = config['model_parameters']['use_same_embedding']
-        
-#         encoder = EncoderRNN(vocab_size, hidden_size, embedding_size)
-#         decoder = DecoderRNN(hidden_size, vocab_size, embedding_size, use_same_embedding)
-        
-#         criterion = nn.CrossEntropyLoss()
-        
-#         if config['model_parameters']['optimizer'] == 'Adam':
-#             optimizer = torch.optim.Adam(list(encoder.parameters()) + list(decoder.parameters()), 
-#                                               lr=1e-7, 
-#                                               weight_decay=1e-2)
-#         elif config['model_parameters']['optimizer'] == 'SGD':
-#             optimizer = torch.optim.SGD(list(encoder.parameters()) + list(decoder.parameters()), 
-#                                              lr=1e-7, 
-#                                              momentum=0.9, 
-#                                              weight_decay=1e-2)
-        
-#         lr_finder = LRFinder(model, optimizer, criterion, device="cuda")
-#         lr_finder.range_test(trainloader, end_lr=100, num_iter=100, step_mode="exp")
-        
-#         # use cuda
-#         self.encoder = self.encoder.to(self.device)
-#         self.decoder = self.decoder.to(self.device)
         pass
-        
     else:
         if config['arch'] == 'Predictor':
             from predictor import Predictor

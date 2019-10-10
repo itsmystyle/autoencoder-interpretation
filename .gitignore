@@ -12,4 +12,4 @@ data/*
 
 # Ignore everything but these
 !data/config.json
-!models/seq2seq/*
+!models/seq2seq/config.json

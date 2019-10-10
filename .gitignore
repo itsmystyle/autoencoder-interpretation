@@ -1,5 +1,5 @@
 # Model files
-model.pkl.*
+models/*
 
 # python compiled code
 *.pyc
